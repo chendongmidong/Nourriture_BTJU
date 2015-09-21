@@ -25,7 +25,7 @@ SECRET_KEY = '-^^jp$sow1me+341x$(+p!ie(*a=3e6^cpmp*eo_(l01uf$6#m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.tossabox.com']
 
 
 # Application definition
