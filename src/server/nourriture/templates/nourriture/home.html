@@ -1,0 +1,70 @@
+<h1>Welcome on the nourriture API !</h1>
+<h2>Routes (TODO):</h2>
+
+<h4>/signin</h4>
+
+<h4>/signup</h4>
+
+<h4>/signout</h4>
+
+<h4>/recipe/add</h4>
+
+<h4>/recipe/delete</h4>
+
+<h4>/recipe/update</h4>
+
+<h4>/ingredient/view (Done) GET</h4>
+
+<pre>
+[
+	{
+		model: "nourriture.ingredient",
+		pk: 1,
+		fields: {
+			description: "de bon gros oeufs !",
+			name: "Egg",
+			price: 1
+		}
+	},
+	{
+		model: "nourriture.ingredient",
+		pk: 2,
+		fields: {
+			description: "De la farine ma gueule",
+			name: "Flour",
+			price: 3
+		}
+	}
+]
+</pre>
+
+<h4>/ingredient/add (Done) POST</h4>
+Parameters :
+<li>name (char, maxLength = 100)</li>
+<li>description (char, maxLength = 254)</li>
+<li>price (integer)</li>
+<br/>
+Response :
+<li>Success :</li>
+<pre>
+{"msg": "success"}
+</pre>
+<li>Error :</li>
+<pre>
+{"msg": "error"}
+</pre>
+
+<h4>/ingredient/delete (Done)</h4>
+Parameters :
+<li>id (integer)</li>
+Response :
+<li>Success :</li>
+<pre>
+{"msg": "success"}
+</pre>
+<li>Error :</li>
+<pre>
+{"msg": "error"}
+</pre>
+<h4>/ingredient/update</h4>
+</p>

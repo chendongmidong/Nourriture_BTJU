@@ -10,43 +10,7 @@ from nourriture.models import Ingredient, Recipe
 
 def home(request):
 	"""Home page"""
-	text = """<h1>Welcome on the nourriture API !</h1>
-			  <h2>Routes (TODO):</h2>
-			  /signin <br/>
-			  /signup <br/>
-			  /signout <br/>
-			  /recipe/add <br/>
-			  /recipe/delete <br/>
-			  /recipe/update <br/>
-			  /ingredient/view (Done) GET<br/>
-			  <pre>
-[
-	{
-		model: "nourriture.ingredient",
-		pk: 1,
-		fields: {
-			description: "de bon gros oeufs !",
-			name: "Egg",
-			price: 1
-		}
-	},
-	{
-		model: "nourriture.ingredient",
-		pk: 2,
-		fields: {
-			description: "De la farine ma gueule",
-			name: "Flour",
-			price: 3
-		}
-	}
-]
-			  </pre>
-			  /ingredient/add (Done)<br/>
-			  /ingredient/delete <br/>
-			  /ingredient/update <br/>
-			  </p>"""
-	return HttpResponse(text)
-	# return render(request, text, locals())
+	return render(request, 'nourriture/home.html', locals())
 
 def ingredientView(request):
 	response = serializers.serialize("json", Ingredient.objects.all())
@@ -56,14 +20,10 @@ def ingredientView(request):
 @csrf_exempt
 def ingredientAdd(request):
 	if request.method != 'POST':
-		data = {'msg':'error'}
-		response = json.JSONEncoder().encode(data)
-		return HttpResponse(response)
+		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
 
 	if request.POST['name'] is None:
-		data = {'msg':'error'}
-		response = json.JSONEncoder().encode(data)
-		return HttpResponse(response)
+		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
 
 	newIngredient = Ingredient(name=request.POST.get('name', None),
 							   description=request.POST.get('description', None),
@@ -73,3 +33,19 @@ def ingredientAdd(request):
 	print (newIngredient.id)
 	return HttpResponse(json.JSONEncoder().encode({'msg': 'success'}))
 
+@csrf_exempt
+def ingredientDelete(request):
+	if request.method != 'POST':
+		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
+
+	if request.POST['id'] is None:
+		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
+
+	ingredient = Ingredient.objects.filter(id=request.POST['id'])
+
+	if ingredient:
+		ingredient.delete()
+	else:
+		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
+
+	return HttpResponse(json.JSONEncoder().encode({'msg': 'success'}))
