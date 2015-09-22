@@ -8,7 +8,7 @@ angular.module('nourriture.controllers', [])
     console.log(test);
 
     test.$get({
-        id: 1
+        id: 3
     }, function (ingredient) {
         console.log("Ingredients =", ingredient);
     });
