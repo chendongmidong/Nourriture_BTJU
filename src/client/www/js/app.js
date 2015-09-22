@@ -6,11 +6,6 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
 
     $window.localStorage.apiUrl = 'http://tossabox.com:8080/api/';
 
-    $http.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
-    $http.defaults.headers.common['Access-Control-Allow-Methods'] = "GET, POST, PUT, DELETE, OPTIONS";
-    $http.defaults.headers.common['Access-Control-Allow-Headers'] = "Authorization";
-
-
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -27,15 +22,6 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
 })
 
 .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $interpolateProvider, $resourceProvider) {
-
-
-
-
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
-
 
     /* Python Django config */
 
