@@ -12,7 +12,23 @@ def home(request):
 	"""Home page"""
 	return render(request, 'nourriture/home.html', locals())
 
-def ingredientView(request):
+def ingredient(request, id):
+	if int(id) <= 0:
+		return sendError('Invalid ID')
+
+	ingredient = Ingredient.objects.get(id=id)
+
+	if ingredient is None:
+		return sendError('Ingredient not found')
+
+	response = {'id': ingredient.id,
+				'name': ingredient.name,
+				'description': ingredient.description,
+				'price': ingredient.price}
+
+	return HttpResponse(json.JSONEncoder().encode(response))
+
+def ingredientAll(request):
 	response = serializers.serialize("json", Ingredient.objects.all())
 
 	return HttpResponse(response)
@@ -170,7 +186,7 @@ def checkIngredient(ingredients):
 
 	return ingredientSet
 
-def sendError(error="", status=400):
+def sendError(error=None, status=400):
 	if error is None:
 		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}), status=status)
 	else:

@@ -6,17 +6,15 @@ class Ingredient(models.Model):
     price = models.IntegerField(null=True)
 
     def __str__(self):
-        """ 
-        Cette méthode que nous définirons dans tous les modèles
-        nous permettra de reconnaître facilement les différents objets que 
-        nous traiterons plus tard et dans l'administration
-        """
         return self.name
 
 class Recipe(models.Model):
-	name = models.CharField(max_length=100)
+	name = models.CharField(max_length=100, unique=True)
 	description = models.TextField(max_length=254, null=True)
 	ingredient = models.ManyToManyField(Ingredient, through='Recipe_Ingredient')
+
+	def __str__(self):
+		return self.name
 
 class Recipe_Ingredient(models.Model):
 	ingredient = models.ForeignKey(Ingredient)
