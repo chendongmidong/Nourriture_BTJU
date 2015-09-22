@@ -213,11 +213,12 @@ def serializeRecipe(recipe):
 	if recipe.description is not None and len(recipe.description) > 0:
 		recipe['description'] = recipe.description
 
-def sendResponse(response):
-	tosend = HttpResponse(response)
+def sendResponse(response, status=200):
+	tosend = HttpResponse(response, status=status)
 	tosend['Access-Control-Allow-Origin'] = "*"
-	tosend['Access-Control-Allow-Methods'] = "POST, OPTIONS, GET, PUT, DELETE"
-	tosend['Access-Control-Allow-Headers'] = "X-Requested-With"
+	tosend['Access-Control-Allow-Methods'] = "*"
+	tosend['Access-Control-Allow-Headers'] = "*"
+	tosend["Access-Control-Max-Age"] = "100000"
 	return tosend
 
 
