@@ -1,12 +1,28 @@
+from nourriture.models import Ingredient, Recipe, Recipe_Ingredient
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.shortcuts import render
-
 from django.core import serializers
-
+from django.shortcuts import render
 import json
 
-from nourriture.models import Ingredient, Recipe, Recipe_Ingredient
+# def signin(request):
+
+def signup(request):
+	if request.method != 'POST':
+		return sendError('No post request')
+	if request.POST.get('name', None) is None:
+		return sendError('Name not defined')
+	if request.POST.get('email', None) is None:
+		return sendError('Email not defined')
+	if request.POST.get('password', None) is None:
+		return sendError('Password not defined')
+
+	user = User.objects.create(request.POST['login'], 
+							   request.POST['email'],
+							   request.POST['password'])
+
+	return sendResponse({'status': 'success'})
 
 def home(request):
 	"""Home page"""
@@ -23,7 +39,7 @@ def ingredient(request, id):
 
 	response = serializeIngredient(ingredient)
 
-	return sendResponse(json.JSONEncoder().encode(response))
+	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'content': response}))
 
 def ingredientAll(request):
 	response = list()
@@ -31,7 +47,7 @@ def ingredientAll(request):
 	for ingredient in ingredients:
 		response.append(serializeIngredient(ingredient))
 
-	return sendResponse(json.JSONEncoder().encode(response))
+	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'content': response}))
 
 @csrf_exempt
 def ingredientAdd(request):
@@ -50,7 +66,7 @@ def ingredientAdd(request):
 
 	newIngredient.save()
 
-	return sendResponse(json.JSONEncoder().encode({'msg': 'success', 'id': newIngredient.id}))
+	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'id': newIngredient.id}))
 
 @csrf_exempt
 def ingredientDelete(request):
@@ -67,7 +83,7 @@ def ingredientDelete(request):
 	else:
 		return sendError('Id not found')
 
-	return sendResponse(json.JSONEncoder().encode({'msg': 'success'}))
+	return sendResponse(json.JSONEncoder().encode({'status': 'success'}))
 
 @csrf_exempt
 def ingredientUpdate(request):
@@ -91,7 +107,7 @@ def ingredientUpdate(request):
 
 	ingredient.save()
 
-	return sendResponse(json.JSONEncoder().encode({'msg': 'success', 'id': ingredient.id}))
+	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'id': ingredient.id}))
 
 @csrf_exempt
 def recipeAdd(request):
@@ -118,7 +134,7 @@ def recipeAdd(request):
 										 recipe=newRecipe,
 										 quantity=1)
 
-	return sendResponse(json.JSONEncoder().encode({'msg': 'success', 'id': newRecipe.id}))
+	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'id': newRecipe.id}))
 
 @csrf_exempt
 def recipeDelete(request):
@@ -137,7 +153,7 @@ def recipeDelete(request):
 	else:
 		return sendError('Id not found')
 
-	return sendResponse(json.JSONEncoder().encode({'msg': 'success'}))
+	return sendResponse(json.JSONEncoder().encode({'status': 'success'}))
 
 @csrf_exempt
 def recipeUpdate(request):
@@ -172,7 +188,7 @@ def recipeUpdate(request):
 										 recipe=recipe,
 										 quantity=1)
 
-	return sendResponse(json.JSONEncoder().encode({'msg': 'success', 'id': recipe.id}))
+	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'id': recipe.id}))
 
 
 
