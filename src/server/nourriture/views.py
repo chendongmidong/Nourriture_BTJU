@@ -23,7 +23,7 @@ def ingredient(request, id):
 
 	response = serializeIngredient(ingredient)
 
-	return HttpResponse(json.JSONEncoder().encode(response))
+	return sendResponse(json.JSONEncoder().encode(response))
 
 def ingredientAll(request):
 	response = list()
@@ -31,7 +31,7 @@ def ingredientAll(request):
 	for ingredient in ingredients:
 		response.append(serializeIngredient(ingredient))
 
-	return HttpResponse(json.JSONEncoder().encode(response))
+	return sendResponse(json.JSONEncoder().encode(response))
 
 @csrf_exempt
 def ingredientAdd(request):
@@ -50,7 +50,7 @@ def ingredientAdd(request):
 
 	newIngredient.save()
 
-	return HttpResponse(json.JSONEncoder().encode({'msg': 'success', 'id': newIngredient.id}))
+	return sendResponse(json.JSONEncoder().encode({'msg': 'success', 'id': newIngredient.id}))
 
 @csrf_exempt
 def ingredientDelete(request):
@@ -67,7 +67,7 @@ def ingredientDelete(request):
 	else:
 		return sendError('Id not found')
 
-	return HttpResponse(json.JSONEncoder().encode({'msg': 'success'}))
+	return sendResponse(json.JSONEncoder().encode({'msg': 'success'}))
 
 @csrf_exempt
 def ingredientUpdate(request):
@@ -91,7 +91,7 @@ def ingredientUpdate(request):
 
 	ingredient.save()
 
-	return HttpResponse(json.JSONEncoder().encode({'msg': 'success', 'id': ingredient.id}))
+	return sendResponse(json.JSONEncoder().encode({'msg': 'success', 'id': ingredient.id}))
 
 @csrf_exempt
 def recipeAdd(request):
@@ -118,7 +118,7 @@ def recipeAdd(request):
 										 recipe=newRecipe,
 										 quantity=1)
 
-	return HttpResponse(json.JSONEncoder().encode({'msg': 'success', 'id': newRecipe.id}))
+	return sendResponse(json.JSONEncoder().encode({'msg': 'success', 'id': newRecipe.id}))
 
 @csrf_exempt
 def recipeDelete(request):
@@ -137,7 +137,7 @@ def recipeDelete(request):
 	else:
 		return sendError('Id not found')
 
-	return HttpResponse(json.JSONEncoder().encode({'msg': 'success'}))
+	return sendResponse(json.JSONEncoder().encode({'msg': 'success'}))
 
 @csrf_exempt
 def recipeUpdate(request):
@@ -172,7 +172,9 @@ def recipeUpdate(request):
 										 recipe=recipe,
 										 quantity=1)
 
-	return HttpResponse(json.JSONEncoder().encode({'msg': 'success', 'id': recipe.id}))
+	return sendResponse(json.JSONEncoder().encode({'msg': 'success', 'id': recipe.id}))
+
+
 
 def checkIngredient(ingredients):
 	if ingredients is None:
@@ -194,7 +196,7 @@ def sendError(error=None, status=400):
 
 def serializeIngredient(ingredient):
 	response = dict()
-	if ingredient.name is not None and len(ingredient.name) > 0:
+	if ingredient.name is not None:
 		response['name'] = ingredient.name
 	if ingredient.description is not None and len(ingredient.description) > 0:
 		response['description'] = ingredient.description
@@ -203,3 +205,19 @@ def serializeIngredient(ingredient):
 	response['id'] = ingredient.id
 
 	return response
+
+def serializeRecipe(recipe):
+	response = dict()
+	if recipe.name is not None:
+		response['name'] = recipe.name
+	if recipe.description is not None and len(recipe.description) > 0:
+		recipe['description'] = recipe.description
+
+def sendResponse(response):
+	tosend = HttpResponse(response)
+	tosend['Access-Control-Allow-Origin'] = "*"
+	tosend['Access-Control-Allow-Methods'] = "POST, OPTIONS, GET, PUT, DELETE"
+	tosend['Access-Control-Allow-Headers'] = "X-Requested-With"
+	return tosend
+
+

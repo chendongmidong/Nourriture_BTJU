@@ -4,6 +4,7 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(max_length=254, null=True)
     price = models.IntegerField(null=True)
+    #Photo
 
     def __str__(self):
         return self.name
@@ -24,3 +25,7 @@ class Recipe_Ingredient(models.Model):
 	#  Une pincée de sel
 	#  500g de farine
 	#  2 oeufs
+
+	#Vidéo
+	#Photo
+	#Instructions
