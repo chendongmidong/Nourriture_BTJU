@@ -25,13 +25,13 @@ def ingredientAdd(request):
 	if request.POST['name'] is None:
 		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
 
-	newIngredient = Ingredient(name=request.POST.get('name', None),
+	newIngredient = Ingredient(name=request.POST.get('name', "None"),
 							   description=request.POST.get('description', None),
 							   price=request.POST.get('price', None))
 
 	newIngredient.save()
-	print (newIngredient.id)
-	return HttpResponse(json.JSONEncoder().encode({'msg': 'success'}))
+
+	return HttpResponse(json.JSONEncoder().encode({'msg': 'success', 'id': newIngredient.id}))
 
 @csrf_exempt
 def ingredientDelete(request):
@@ -49,3 +49,29 @@ def ingredientDelete(request):
 		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
 
 	return HttpResponse(json.JSONEncoder().encode({'msg': 'success'}))
+
+@csrf_exempt
+def ingredientUpdate(request):
+	if request.method != 'POST':
+		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
+
+	if request.POST['name'] is None:
+		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
+
+	if request.POST['id'] is None:
+		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
+
+	ingredient = Ingredient.objects.filter(id=request.POST['id'])
+
+	if ingredient is None:
+		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}))
+
+	ingredient.name = request.POST.get('name', "None")
+	ingredient.description = request.POST.get('description', None)
+	ingredient.price = request.POST.get('price', None)
+
+	ingredient.save()
+
+	return HttpResponse(json.JSONEncoder().encode({'msg': 'success', 'id': ingredient.id}))
+
+

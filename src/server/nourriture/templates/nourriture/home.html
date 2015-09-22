@@ -41,30 +41,61 @@
 <h4>/ingredient/add (Done) POST</h4>
 Parameters :
 <li>name (char, maxLength = 100)</li>
-<li>description (char, maxLength = 254)</li>
-<li>price (integer)</li>
+<li>description (char, maxLength = 254) <i>optional</i></li>
+<li>price (integer) <i>optional</i></li>
 <br/>
 Response :
 <li>Success :</li>
 <pre>
-{"msg": "success"}
+{
+	"msg": "success",
+	"id": 42
+}
 </pre>
 <li>Error :</li>
 <pre>
-{"msg": "error"}
+{
+	"msg": "error"
+}
 </pre>
 
+<!-- DELETE -->
 <h4>/ingredient/delete (Done)</h4>
 Parameters :
 <li>id (integer)</li>
 Response :
 <li>Success :</li>
 <pre>
-{"msg": "success"}
+{
+	"msg": "success",
+}
 </pre>
 <li>Error :</li>
 <pre>
-{"msg": "error"}
+{
+	"msg": "error"
+}
 </pre>
-<h4>/ingredient/update</h4>
+
+<!-- UPDATE -->
+<h4>/ingredient/update (Done) POST</h4>
+Parameters :
+<li>name (char, maxLength = 100)</li>
+<li>description (char, maxLength = 254) <i>optional</i></li>
+<li>price (integer) <i>optional</i></li>
+<br/>
+Response :
+<li>Success :</li>
+<pre>
+{
+	"msg": "success",
+	"id": 42
+}
+</pre>
+<li>Error :</li>
+<pre>
+{
+	"msg": "error"
+}
+</pre>
 </p>
