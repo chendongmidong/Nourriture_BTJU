@@ -9,8 +9,8 @@
 
 
 <!-- ADD RECIPE -->
-<h4>/recipe/add</h4>
-Parameters :
+<h4>/recipe/add (Done) POST</h4>
+Parameters POST:
 <li>name (char, maxLength = 100)</li>
 <li>description (char, maxLength = 254) <i>optional</i></li>
 <li>ingredient (array, ex : [1, 2, 3, 42])</li>
@@ -32,10 +32,46 @@ Response :
 
 
 <!-- DELETE RECIPE -->
-<h4>/recipe/delete</h4>
+<h4>/recipe/delete (Done)</h4>
+Parameters POST:
+<li>id (integer)</li>
+Response :
+<li>Success :</li>
+<pre>
+{
+	"msg": "success",
+}
+</pre>
+<li>Error :</li>
+<pre>
+{
+	"msg": "error"
+}
+</pre>
 
-<h4>/recipe/update</h4>
 
+<!-- UPDATE RECIPE -->
+<h4>/recipe/update (Done)</h4>
+Parameters POST:
+<li>name (char, maxLength = 100)</li>
+<li>id (integer)</li>
+<li>description (char, maxLength = 254) <i>optional</i></li>
+<li>ingredient (array, ex : [1, 2, 3, 42])</li>
+<br/>
+Response :
+<li>Success :</li>
+<pre>
+{
+	"msg": "success",
+	"id": 23
+}
+</pre>
+<li>Error :</li>
+<pre>
+{
+	"msg": "error"
+}
+</pre>
 
 <!-- VIEW INGREDIENTS -->
 <h4>/ingredient/view (Done) GET</h4>
@@ -65,7 +101,7 @@ Response :
 
 <!-- ADD INGREDIENT -->
 <h4>/ingredient/add (Done) POST</h4>
-Parameters :
+Parameters POST:
 <li>name (char, maxLength = 100)</li>
 <li>description (char, maxLength = 254) <i>optional</i></li>
 <li>price (integer) <i>optional</i></li>
@@ -88,7 +124,7 @@ Response :
 
 <!-- DELETE INGREDIENT-->
 <h4>/ingredient/delete (Done) POST</h4>
-Parameters :
+Parameters POST:
 <li>id (integer)</li>
 Response :
 <li>Success :</li>
@@ -107,7 +143,7 @@ Response :
 
 <!-- UPDATE INGREDIENT -->
 <h4>/ingredient/update (Done) POST</h4>
-Parameters :
+Parameters POST :
 <li>name (char, maxLength = 100)</li>
 <li>description (char, maxLength = 254) <i>optional</i></li>
 <li>price (integer) <i>optional</i></li>

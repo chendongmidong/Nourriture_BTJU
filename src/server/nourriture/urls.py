@@ -7,4 +7,6 @@ urlpatterns = patterns('nourriture.views',
     url(r'^ingredient/delete$', 'ingredientDelete'),
     url(r'^ingredient/update$', 'ingredientUpdate'),
     url(r'^recipe/add$', 'recipeAdd'),
+    url(r'^recipe/delete$', 'recipeDelete'),
+    url(r'^recipe/update$', 'recipeUpdate'),
 )

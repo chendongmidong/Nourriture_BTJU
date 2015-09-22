@@ -80,7 +80,7 @@ def ingredientUpdate(request):
 @csrf_exempt
 def recipeAdd(request):
 	if request.method != 'POST':
-		return HttpResponse(json.JSONEncoder().encode({'msg': 'error', 'error': 'No post request'}))
+		return sendError('No post request')
 
 	if request.POST['name'] is None:
 		return sendError('Name not defined')
@@ -104,8 +104,59 @@ def recipeAdd(request):
 
 	return HttpResponse(json.JSONEncoder().encode({'msg': 'success', 'id': newRecipe.id}))
 
-# @csrf_exempt
-# def recipeDelete
+@csrf_exempt
+def recipeDelete(request):
+	if request.method != 'POST':
+		return sendError('No post request')
+
+	if request.POST['id'] is None:
+		return sendError('Id not defined')
+
+	recipe = Recipe.objects.get(id=request.POST['id'])
+
+	if recipe:
+		recipe.delete()
+		rel = Recipe_Ingredient.objects.filter(recipe=recipe)
+		rel.delete()
+	else:
+		return sendError('Id not found')
+
+	return HttpResponse(json.JSONEncoder().encode({'msg': 'success'}))
+
+@csrf_exempt
+def recipeUpdate(request):
+	if request.method != 'POST':
+		return sendError('No post request')
+
+	if request.POST['name'] is None:
+		return sendError('Name not defined')
+
+	if request.POST['id'] is None:
+		return sendError('Id not defined')
+
+	recipeIngredients = request.POST.getlist('ingredients', None)
+
+	ingredientSet = checkIngredient(recipeIngredients)
+
+	if ingredientSet is False:
+		return sendError('Ingredients error')
+
+	recipe = Recipe.objects.get(id=request.POST['id'])
+
+	recipe.name = request.POST.get('name', "None")
+	recipe.description = request.POST.get('description', None)
+
+	rel = Recipe_Ingredient.objects.filter(recipe=recipe)
+	rel.delete()
+
+	recipe.save()
+
+	for ingredient in ingredientSet:
+		Recipe_Ingredient.objects.create(ingredient=ingredient,
+										 recipe=recipe,
+										 quantity=1)
+
+	return HttpResponse(json.JSONEncoder().encode({'msg': 'success', 'id': recipe.id}))
 
 def checkIngredient(ingredients):
 	if ingredients is None:
@@ -119,7 +170,7 @@ def checkIngredient(ingredients):
 
 	return ingredientSet
 
-def sendError(error=None, status=400):
+def sendError(error="", status=400):
 	if error is None:
 		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}), status=status)
 	else:
