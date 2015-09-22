@@ -21,17 +21,17 @@ def ingredient(request, id):
 	if ingredient is None:
 		return sendError('Ingredient not found')
 
-	response = {'id': ingredient.id,
-				'name': ingredient.name,
-				'description': ingredient.description,
-				'price': ingredient.price}
+	response = serializeIngredient(ingredient)
 
 	return HttpResponse(json.JSONEncoder().encode(response))
 
 def ingredientAll(request):
-	response = serializers.serialize("json", Ingredient.objects.all())
+	response = list()
+	ingredients = Ingredient.objects.all()
+	for ingredient in ingredients:
+		response.append(serializeIngredient(ingredient))
 
-	return HttpResponse(response)
+	return HttpResponse(json.JSONEncoder().encode(response))
 
 @csrf_exempt
 def ingredientAdd(request):
@@ -192,4 +192,14 @@ def sendError(error=None, status=400):
 	else:
 		return HttpResponse(json.JSONEncoder().encode({'msg': 'error', 'error': error}), status=status)
 
+def serializeIngredient(ingredient):
+	response = dict()
+	if ingredient.name is not None and len(ingredient.name) > 0:
+		response['name'] = ingredient.name
+	if ingredient.description is not None and len(ingredient.description) > 0:
+		response['description'] = ingredient.description
+	if ingredient.price is not None:
+		response['price'] = ingredient.price
+	response['id'] = ingredient.id
 
+	return response
