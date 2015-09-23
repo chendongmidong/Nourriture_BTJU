@@ -1,16 +1,21 @@
 angular.module('nourriture.controllers', [])
 
-.controller('DashCtrl', function ($scope, Ingredients) {
-    var test = new Ingredients();
+.controller('LoginCtrl', function ($scope, $state) {
 
-    $scope.test = test;
+    $scope.login = function () {
+        $state.go('tab.home');
+    }
 
-    console.log(test);
+})
 
-    test.$get({
-        id: 3
-    }, function (ingredient) {
-        console.log("Ingredients =", ingredient);
+.controller('HomeCtrl', function ($scope, Ingredients) {
+
+    Ingredients.byId(3, function (ingredient) {
+        $scope.ingredientById = ingredient;
+    });
+
+    Ingredients.all(function (ingredients) {
+        $scope.ingredients = ingredients;
     });
 })
 

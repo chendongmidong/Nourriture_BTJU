@@ -37,10 +37,19 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
 
     /* Python Django config */
 
+    $urlRouterProvider.otherwise('/login');
+
+
     $stateProvider
 
+        .state('login', {
+        url: '/login',
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
+    })
+
     // setup an abstract state for the tabs directive
-        .state('tab', {
+    .state('tab', {
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
@@ -48,12 +57,22 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
 
     // Each tab has its own nav history stack:
 
-    .state('tab.dash', {
-        url: '/dash',
+    .state('tab.login', {
+        url: '/login',
         views: {
-            'tab-dash': {
-                templateUrl: 'templates/tab-dash.html',
-                controller: 'DashCtrl'
+            'login': {
+                templateUrl: 'templates/login.html',
+                controller: 'LoginCtrl'
+            }
+        }
+    })
+
+    .state('tab.home', {
+        url: '/home',
+        views: {
+            'home': {
+                templateUrl: 'templates/home.html',
+                controller: 'HomeCtrl'
             }
         }
     })

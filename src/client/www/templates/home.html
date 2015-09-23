@@ -1,0 +1,9 @@
+<ion-view view-title="List of Ingredients ">
+    <ion-content class="padding">
+        <div class="list card">
+            <ion-item ng-repeat="ingredient in ingredients">
+                Name: {{ingredient.name}} </br> Price: {{ingredient.price}} </br> Id: {{ingredient.id}} </br> Description: {{ingredient.description}}
+            </ion-item>
+        </div>
+    </ion-content>
+</ion-view>
