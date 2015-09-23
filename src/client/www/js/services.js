@@ -50,9 +50,23 @@ angular.module('nourriture.services', ['ngResource'])
 })
 
 .factory('Ingredients', function ($resource, $window) {
-    var url = $window.localStorage.apiUrl + 'ingredient/:id';
-    console.info(url);
-    return $resource(url);
+
+    var url = $window.localStorage.apiUrl;
+
+    return {
+        byId: function (id, callback) {
+            $resource(url + 'ingredient/:id').get({
+                id: id
+            }, function (ingredient) {
+                callback(ingredient.content);
+            });
+        },
+        all: function (callback) {
+            $resource(url + 'ingredient/all').get({}, function (ingredients) {
+                callback(ingredients.content);
+            });
+        }
+    }
 })
 
 ;
