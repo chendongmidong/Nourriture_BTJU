@@ -8,21 +8,22 @@ import json
 
 # def signin(request):
 
+@csrf_exempt
 def signup(request):
 	if request.method != 'POST':
 		return sendError('No post request')
-	if request.POST.get('name', None) is None:
-		return sendError('Name not defined')
+	if request.POST.get('login', None) is None:
+		return sendError('Login not defined')
 	if request.POST.get('email', None) is None:
 		return sendError('Email not defined')
 	if request.POST.get('password', None) is None:
 		return sendError('Password not defined')
 
-	user = User.objects.create(request.POST['login'], 
+	user = User.objects.create_user(request.POST['login'], 
 							   request.POST['email'],
 							   request.POST['password'])
 
-	return sendResponse({'status': 'success'})
+	return sendResponse(json.dumps({'status': 'success', 'id': user.id}))
 
 def home(request):
 	"""Home page"""
@@ -39,7 +40,7 @@ def ingredient(request, id):
 
 	response = serializeIngredient(ingredient)
 
-	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'content': response}))
+	return sendResponse(json.dumps({'status': 'success', 'content': response}))
 
 def ingredientAll(request):
 	response = list()
@@ -47,7 +48,7 @@ def ingredientAll(request):
 	for ingredient in ingredients:
 		response.append(serializeIngredient(ingredient))
 
-	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'content': response}))
+	return sendResponse(json.dumps({'status': 'success', 'content': response}))
 
 @csrf_exempt
 def ingredientAdd(request):
@@ -66,7 +67,7 @@ def ingredientAdd(request):
 
 	newIngredient.save()
 
-	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'id': newIngredient.id}))
+	return sendResponse(json.dumps({'status': 'success', 'id': newIngredient.id}))
 
 @csrf_exempt
 def ingredientDelete(request):
@@ -83,7 +84,7 @@ def ingredientDelete(request):
 	else:
 		return sendError('Id not found')
 
-	return sendResponse(json.JSONEncoder().encode({'status': 'success'}))
+	return sendResponse(json.dumps({'status': 'success'}))
 
 @csrf_exempt
 def ingredientUpdate(request):
@@ -107,7 +108,7 @@ def ingredientUpdate(request):
 
 	ingredient.save()
 
-	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'id': ingredient.id}))
+	return sendResponse(json.dumps({'status': 'success', 'id': ingredient.id}))
 
 @csrf_exempt
 def recipeAdd(request):
@@ -134,7 +135,7 @@ def recipeAdd(request):
 										 recipe=newRecipe,
 										 quantity=1)
 
-	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'id': newRecipe.id}))
+	return sendResponse(json.dumps({'status': 'success', 'id': newRecipe.id}))
 
 @csrf_exempt
 def recipeDelete(request):
@@ -153,7 +154,7 @@ def recipeDelete(request):
 	else:
 		return sendError('Id not found')
 
-	return sendResponse(json.JSONEncoder().encode({'status': 'success'}))
+	return sendResponse(json.dumps({'status': 'success'}))
 
 @csrf_exempt
 def recipeUpdate(request):
@@ -188,7 +189,7 @@ def recipeUpdate(request):
 										 recipe=recipe,
 										 quantity=1)
 
-	return sendResponse(json.JSONEncoder().encode({'status': 'success', 'id': recipe.id}))
+	return sendResponse(json.dumps({'status': 'success', 'id': recipe.id}))
 
 
 
@@ -206,9 +207,9 @@ def checkIngredient(ingredients):
 
 def sendError(error=None, status=400):
 	if error is None:
-		return HttpResponse(json.JSONEncoder().encode({'msg': 'error'}), status=status)
+		return HttpResponse(json.dumps({'msg': 'error'}), status=status)
 	else:
-		return HttpResponse(json.JSONEncoder().encode({'msg': 'error', 'error': error}), status=status)
+		return HttpResponse(json.dumps({'msg': 'error', 'error': error}), status=status)
 
 def serializeIngredient(ingredient):
 	response = dict()
