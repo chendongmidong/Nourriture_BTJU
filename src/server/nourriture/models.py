@@ -14,6 +14,7 @@ class Recipe(models.Model):
 	name = models.CharField(max_length=100, unique=True)
 	description = models.TextField(max_length=254, null=True)
 	ingredient = models.ManyToManyField(Ingredient, through='Recipe_Ingredient')
+	count_view = models.IntegerField()
 
 	def __str__(self):
 		return self.name
