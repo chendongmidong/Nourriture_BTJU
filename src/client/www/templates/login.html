@@ -1,6 +1,15 @@
-<ion-view view-title="Login" name="login-view">
+<ion-view view-title="Login into Nourriture WebApp" name="login-view">
     <ion-content class="padding">
         <div class="list list-inset">
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Role
+                </div>
+                <select ng-model="credentials.role" ng-options="item.id as item.label for item in roles">
+                </select>
+            </label>
+
             <label class="item item-input">
                 <input type="text" placeholder="Username" ng-model="credentials.username">
             </label>

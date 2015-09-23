@@ -74,6 +74,16 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
         }
     })
 
+    .state('tab.ingredients', {
+        url: '/ingredients',
+        views: {
+            'ingredients': {
+                templateUrl: 'templates/ingredients.html',
+                controller: 'IngredientsCtrl'
+            }
+        }
+    })
+
     .state('tab.chats', {
             url: '/chats',
             views: {
