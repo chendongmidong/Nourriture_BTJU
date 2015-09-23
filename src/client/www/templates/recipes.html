@@ -1,0 +1,9 @@
+<ion-view view-title="List of Recipes">
+    <ion-content class="padding">
+        <div class="list card">
+            <ion-item ng-repeat="recipe in recipes">
+                Name: {{recipe.name}} </br> Price: {{recipe.price}} </br> Id: {{recipe.id}} </br> Description: {{recipe.description}}
+            </ion-item>
+        </div>
+    </ion-content>
+</ion-view>
