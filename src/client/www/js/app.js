@@ -37,9 +37,6 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
 
     /* Python Django config */
 
-    $urlRouterProvider.otherwise('/login');
-
-
     $stateProvider
 
         .state('login', {
@@ -77,36 +74,37 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
         }
     })
 
-    .state('tab.chats', {
-            url: '/chats',
-            views: {
-                'tab-chats': {
-                    templateUrl: 'templates/tab-chats.html',
-                    controller: 'ChatsCtrl'
-                }
+    .state('tab.ingredients', {
+        url: '/ingredients',
+        views: {
+            'ingredients': {
+                templateUrl: 'templates/ingredients.html',
+                controller: 'IngredientsCtrl'
             }
-        })
-        .state('tab.chat-detail', {
-            url: '/chats/:chatId',
-            views: {
-                'tab-chats': {
-                    templateUrl: 'templates/chat-detail.html',
-                    controller: 'ChatDetailCtrl'
-                }
+        }
+    })
+
+    .state('tab.recipes', {
+        url: '/recipes',
+        views: {
+            'recipes': {
+                templateUrl: 'templates/recipes.html',
+                controller: 'RecipesCtrl'
             }
-        })
+        }
+    })
 
     .state('tab.account', {
         url: '/account',
         views: {
-            'tab-account': {
-                templateUrl: 'templates/tab-account.html',
+            'account': {
+                templateUrl: 'templates/account.html',
                 controller: 'AccountCtrl'
             }
         }
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('/login');
 
 });
