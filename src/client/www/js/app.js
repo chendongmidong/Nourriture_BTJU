@@ -37,9 +37,6 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
 
     /* Python Django config */
 
-    $urlRouterProvider.otherwise('/login');
-
-
     $stateProvider
 
         .state('login', {
@@ -107,6 +104,6 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('/login');
 
 });

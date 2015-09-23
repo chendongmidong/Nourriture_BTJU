@@ -2,7 +2,14 @@ angular.module('nourriture.controllers', [])
 
 .controller('LoginCtrl', function ($scope, $state) {
 
+    $scope.credentials = {
+        username: "",
+        password: ""
+    };
+
     $scope.login = function () {
+        console.log("Username:", $scope.credentials.username, "Password:", $scope.credentials.password);
+        console.info("Using OpenID here, soon.");
         $state.go('tab.home');
     }
 
