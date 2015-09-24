@@ -1,6 +1,6 @@
 from nourriture.models import Ingredient, Recipe, Recipe_Ingredient
 from django.views.decorators.http import require_http_methods
-from django.contrib.auth.decorators import login_required(login_url='/accounts/login/')
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.http import HttpResponse
