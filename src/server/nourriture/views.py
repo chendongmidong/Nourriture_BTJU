@@ -1,4 +1,6 @@
 from nourriture.models import Ingredient, Recipe, Recipe_Ingredient
+from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required(login_url='/accounts/login/')
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -6,24 +8,24 @@ from django.core import serializers
 from django.shortcuts import render
 import json
 
-# def signin(request):
+# # def signin(request):
 
-@csrf_exempt
-def signup(request):
-	if request.method != 'POST':
-		return sendError('No post request')
-	if request.POST.get('login', None) is None:
-		return sendError('Login not defined')
-	if request.POST.get('email', None) is None:
-		return sendError('Email not defined')
-	if request.POST.get('password', None) is None:
-		return sendError('Password not defined')
+# @csrf_exempt
+# def signup(request):
+# 	if request.method != 'POST':
+# 		return sendError('No post request')
+# 	if request.POST.get('login', None) is None:
+# 		return sendError('Login not defined')
+# 	if request.POST.get('email', None) is None:
+# 		return sendError('Email not defined')
+# 	if request.POST.get('password', None) is None:
+# 		return sendError('Password not defined')
 
-	user = User.objects.create_user(request.POST['login'], 
-							   request.POST['email'],
-							   request.POST['password'])
+# 	user = User.objects.create_user(request.POST['login'], 
+# 							   request.POST['email'],
+# 							   request.POST['password'])
 
-	return sendResponse(json.dumps({'status': 'success', 'id': user.id}))
+# 	return sendResponse(json.dumps({'status': 'success', 'id': user.id}))
 
 def home(request):
 	"""Home page"""
@@ -51,6 +53,7 @@ def ingredientAll(request):
 	return sendResponse(json.dumps({'status': 'success', 'content': response}))
 
 @csrf_exempt
+@login_required(login_url='/accounts/login/')
 def ingredientAdd(request):
 	if request.method != 'POST':
 		return sendError('No post request')
@@ -70,6 +73,7 @@ def ingredientAdd(request):
 	return sendResponse(json.dumps({'status': 'success', 'id': newIngredient.id}))
 
 @csrf_exempt
+#@login_required(login_url='/accounts/login/')
 def ingredientDelete(request):
 	if request.method != 'POST':
 		return sendError('No post request')
@@ -87,6 +91,7 @@ def ingredientDelete(request):
 	return sendResponse(json.dumps({'status': 'success'}))
 
 @csrf_exempt
+#@login_required(login_url='/accounts/login/')
 def ingredientUpdate(request):
 	if request.method != 'POST':
 		return sendError('No post request')
@@ -111,6 +116,7 @@ def ingredientUpdate(request):
 	return sendResponse(json.dumps({'status': 'success', 'id': ingredient.id}))
 
 @csrf_exempt
+#@login_required(login_url='/accounts/login/')
 def recipeAdd(request):
 	if request.method != 'POST':
 		return sendError('No post request')
@@ -138,6 +144,7 @@ def recipeAdd(request):
 	return sendResponse(json.dumps({'status': 'success', 'id': newRecipe.id}))
 
 @csrf_exempt
+#@login_required(login_url='/accounts/login/')
 def recipeDelete(request):
 	if request.method != 'POST':
 		return sendError('No post request')
@@ -157,6 +164,7 @@ def recipeDelete(request):
 	return sendResponse(json.dumps({'status': 'success'}))
 
 @csrf_exempt
+#@login_required(login_url='/accounts/login/')
 def recipeUpdate(request):
 	if request.method != 'POST':
 		return sendError('No post request')
@@ -205,12 +213,6 @@ def checkIngredient(ingredients):
 
 	return ingredientSet
 
-def sendError(error=None, status=400):
-	if error is None:
-		return HttpResponse(json.dumps({'msg': 'error'}), status=status)
-	else:
-		return HttpResponse(json.dumps({'msg': 'error', 'error': error}), status=status)
-
 def serializeIngredient(ingredient):
 	response = dict()
 	if ingredient.name is not None:
@@ -238,4 +240,8 @@ def sendResponse(response, status=200):
 	tosend["Access-Control-Max-Age"] = "100000"
 	return tosend
 
-
+def sendError(error=None, status=400):
+	if error is None:
+		return HttpResponse(json.dumps({'msg': 'error'}), status=status)
+	else:
+		return HttpResponse(json.dumps({'msg': 'error', 'error': error}), status=status)

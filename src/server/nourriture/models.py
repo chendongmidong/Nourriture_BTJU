@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.db import models
 
 class Ingredient(models.Model):
@@ -31,12 +30,3 @@ class Recipe_Ingredient(models.Model):
 	#Vidéo
 	#Photo
 	#Instructions
-
-class Profil(models.Model):
-    user = models.OneToOneField(User)
-    avatar = models.ImageField(null=True, blank=True, upload_to="avatars/")
-    signature = models.TextField(blank=True)
-    newsletter = models.BooleanField(default=False)
-
-    def __str__(self):
-        return "{0}'s profil".format(self.user.username)
