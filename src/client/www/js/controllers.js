@@ -1,6 +1,6 @@
 angular.module('nourriture.controllers', [])
 
-.controller('LoginCtrl', function ($scope, $state) {
+.controller('LoginCtrl', function ($scope, $state, $rootScope) {
 
     $scope.roles = [
         {
@@ -24,10 +24,12 @@ angular.module('nourriture.controllers', [])
     };
 
     $scope.login = function () {
-        console.info("Hi", $scope.roles[$scope.credentials.role].label, $scope.credentials.username, "!");
+        console.info($scope.roles[$scope.credentials.role - 1].id);
+        console.info("Hi", $scope.roles[$scope.credentials.role - 1].label, $scope.credentials.username, "!");
         console.info("Your password is [", $scope.credentials.password, "]");
         console.info("Using OpenID here, soon.");
         $state.go('tab.home');
+        $rootScope.userType = $scope.roles[$scope.credentials.role - 1].label;
     }
 
 })

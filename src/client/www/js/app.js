@@ -1,6 +1,6 @@
 // Ionic Nourriture App
 
-angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.services', 'ngResource'])
+angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.services', 'nourriture.tabs', 'ngResource'])
 
 .run(function ($ionicPlatform, $window, $http) {
 
@@ -49,7 +49,8 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
     .state('tab', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'templates/tabs.html'
+        templateUrl: 'templates/tabs.html',
+        controller: 'TabsCtrl'
     })
 
     // Each tab has its own nav history stack:
