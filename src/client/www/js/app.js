@@ -1,6 +1,6 @@
 // Ionic Nourriture App
 
-angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.services', 'nourriture.tabs', 'ngResource'])
+angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.services', 'nourriture.tabs', 'nourriture.login', 'ngResource'])
 
 .run(function ($ionicPlatform, $window, $http) {
 
