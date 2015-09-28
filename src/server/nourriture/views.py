@@ -241,6 +241,7 @@ def serializeRecipe(recipe):
 		response['name'] = recipe.name
 	if recipe.description is not None and len(recipe.description) > 0:
 		response['description'] = recipe.description
+	response['id'] = recipe.id
 	ingredients = recipe.ingredients.all()
 	response['ingredients'] = list()
 	for i,ingredient in enumerate(ingredients):
