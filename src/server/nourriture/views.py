@@ -115,6 +115,28 @@ def ingredientUpdate(request):
 
 	return sendResponse(json.dumps({'status': 'success', 'id': ingredient.id}))
 
+def recipe(request, id):
+	# if request.method != 'POST':
+	# 	return sendError('No post request')
+	recipe = Recipe.objects.get(id=id)
+
+	if recipe is None :
+		return sendError('Recipe with id {} not found'.format(id))
+
+	response = serializeRecipe(recipe)
+
+	return sendResponse(json.dumps({'status': 'success', 'content': response}))
+
+def recipeAll(request):
+	recipes = Recipe.objects.all()
+
+	response = list()
+
+	for recipe in recipes:
+		response.append(serializeRecipe(recipe))
+
+	return sendResponse(json.dumps({'status': 'success', 'content': response}))
+
 @csrf_exempt
 #@login_required(login_url='/accounts/login/')
 def recipeAdd(request):
@@ -213,6 +235,20 @@ def checkIngredient(ingredients):
 
 	return ingredientSet
 
+def serializeRecipe(recipe):
+	response = dict()
+	if recipe.name is not None:
+		response['name'] = recipe.name
+	if recipe.description is not None and len(recipe.description) > 0:
+		response['description'] = recipe.description
+	ingredients = recipe.ingredients.all()
+	response['ingredients'] = list()
+	for i,ingredient in enumerate(ingredients):
+		ing = serializeIngredient(ingredient)
+		ing['quantity'] = Recipe_Ingredient.objects.get(recipe=recipe, ingredient=ingredient).quantity
+		response['ingredients'].append(ing)
+	return response
+
 def serializeIngredient(ingredient):
 	response = dict()
 	if ingredient.name is not None:
@@ -224,13 +260,6 @@ def serializeIngredient(ingredient):
 	response['id'] = ingredient.id
 
 	return response
-
-def serializeRecipe(recipe):
-	response = dict()
-	if recipe.name is not None:
-		response['name'] = recipe.name
-	if recipe.description is not None and len(recipe.description) > 0:
-		recipe['description'] = recipe.description
 
 def sendResponse(response, status=200):
 	tosend = HttpResponse(response, status=status)
