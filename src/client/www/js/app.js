@@ -1,8 +1,8 @@
 // Ionic Nourriture App
 
-angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.services', 'nourriture.tabs', 'nourriture.login', 'ngResource'])
+angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.services', 'nourriture.tabs', 'nourriture.login', 'ngResource', 'angular-oauth2'])
 
-.run(function ($ionicPlatform, $window, $http) {
+.run(function ($ionicPlatform, $window, $http, $rootScope, OAuth) {
 
     $window.localStorage.apiUrl = 'http://tossabox.com:8080/api/';
 
@@ -19,7 +19,30 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
             StatusBar.styleLightContent();
         }
     });
+
+    $rootScope.$on('oauth:error', function (event, rejection) {
+        // Ignore `invalid_grant` error - should be catched on `LoginController`.
+        if ('invalid_grant' === rejection.data.error) {
+            return;
+        }
+
+        // Refresh token when a `invalid_token` error occurs.
+        if ('invalid_token' === rejection.data.error) {
+            return OAuth.getRefreshToken();
+        }
+
+        // Redirect to `/login` with the `error_reason`.
+        return $window.location.href = '/login?error_reason=' + rejection.data.error;
+    });
 })
+
+.config(['OAuthProvider', function (OAuthProvider) {
+    OAuthProvider.configure({
+        baseUrl: 'https://api.website.com',
+        clientId: 'CLIENT_ID',
+        clientSecret: 'CLIENT_SECRET' // optional
+    });
+  }])
 
 .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $interpolateProvider, $resourceProvider) {
 

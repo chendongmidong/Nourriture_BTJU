@@ -29,29 +29,6 @@ angular.module('nourriture.login', ['ngResource'])
         console.info("Your password is [", $scope.credentials.password, "]");
         console.info("Using OpenID here, soon.");
 
-        // set client_id and redirect_uri
-        var clientInfo = {
-            client_id: 'MyClientId',
-            redirect_uri: 'https://rp.example.com/callback.html'
-        };
-        OIDC.setClientInfo(clientInfo);
-
-        // set Identity Provider configuration information using discovery
-        var providerInfo = OIDC.discover('https://op.example.com');
-
-        // or set via manual configuration
-        // var providerInfo = {
-        //                      issuer: 'https:/op.example.com',
-        //                      authorization_endpoint: 'http://op.example.com/auth.html',
-        //                      jwks_uri: 'https://op.example.com/jwks'
-        //                    };
-
-        // set Identity Provider configuration
-        OIDC.setProviderInfo(providerInfo);
-
-        // store configuration for reuse in the callback page
-        OIDC.storeInfo(providerInfo, clientInfo);
-
         // on login error
         //        $window.alert("Hi, login error");
 
