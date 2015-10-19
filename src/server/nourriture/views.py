@@ -44,6 +44,7 @@ def ingredient(request, id):
 
 	return sendResponse(json.dumps({'status': 'success', 'content': response}))
 
+@csrf_exempt
 def ingredientAll(request):
 	response = list()
 	ingredients = Ingredient.objects.all()
@@ -115,10 +116,14 @@ def ingredientUpdate(request):
 
 	return sendResponse(json.dumps({'status': 'success', 'id': ingredient.id}))
 
+@csrf_exempt
 def recipe(request, id):
 	# if request.method != 'POST':
 	# 	return sendError('No post request')
-	recipe = Recipe.objects.get(id=id)
+	try:
+		recipe = Recipe.objects.get(id=id)
+	except:
+		recipe = None
 
 	if recipe is None :
 		return sendError('Recipe with id {} not found'.format(id))
@@ -220,8 +225,6 @@ def recipeUpdate(request):
 										 quantity=1)
 
 	return sendResponse(json.dumps({'status': 'success', 'id': recipe.id}))
-
-
 
 def checkIngredient(ingredients):
 	if ingredients is None:

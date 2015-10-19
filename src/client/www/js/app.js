@@ -5,6 +5,7 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
 .run(function ($ionicPlatform, $window, $http, $rootScope, OAuth) {
 
     $window.localStorage.apiUrl = 'http://tossabox.com:8080/api/';
+    // $window.localStorage.apiUrl = 'http://tossabox.com:8080/api/';
 
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

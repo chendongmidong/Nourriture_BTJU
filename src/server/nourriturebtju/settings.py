@@ -27,18 +27,27 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['.tossabox.com']
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
 INSTALLED_APPS = (
+    # CONTRIB
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # PROJECT APPS
     'nourriture',
-    'accounts'
+    'accounts',
+
+    # INSTALLED MODULES
+    'corsheaders',
+    'oauth2_provider',
+    # 'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
