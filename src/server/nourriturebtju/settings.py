@@ -47,7 +47,7 @@ INSTALLED_APPS = (
     # INSTALLED MODULES
     'corsheaders',
     'oauth2_provider',
-    # 'rest_framework',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -61,6 +61,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGE_SIZE': 40
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 
