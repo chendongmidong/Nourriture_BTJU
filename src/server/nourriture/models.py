@@ -9,7 +9,6 @@ class Ingredient(models.Model):
     fat = models.FloatField()
     carbohydrate = models.FloatField()
     vitamin = models.FloatField()
-    #Photo
 
     def __str__(self):
         return self.name
@@ -26,9 +25,21 @@ class Recipe(models.Model):
 	def __str__(self):
 		return self.name
 
-class Religious(models.Model):
+class Religion(models.Model):
 	name = models.CharField(max_length=42, unique=True)
 	description = models.TextField(null=True)
+	forbidden_ingredients = models.ManyToManyField(Ingredient)
+
+
+class Intolerence(models.Model):
+	name = models.CharField(max_length=42, unique=True)
+	description = models.TextField(null=True)
+	forbidden_ingredients = models.ManyToManyField(Ingredient)
+
+class Alergie(models.Model):
+	name = models.CharField(max_length=42, unique=True)
+	description = models.TextField(null=True)
+	forbidden_ingredients = models.ManyToManyField(Ingredient)
 
 class Recipe_Ingredient(models.Model):
 	ingredient = models.ForeignKey(Ingredient)
