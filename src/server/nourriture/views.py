@@ -54,7 +54,7 @@ def ingredientAll(request):
 	return sendResponse(json.dumps({'status': 'success', 'content': response}))
 
 @csrf_exempt
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/accounts/login/')
 def ingredientAdd(request):
 	if request.method != 'POST':
 		return sendError('No post request')
