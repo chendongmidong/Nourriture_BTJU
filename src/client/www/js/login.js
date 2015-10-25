@@ -1,6 +1,6 @@
-angular.module('nourriture.login', ['ngResource'])
+angular.module('nourriture.login', ['ngResource', 'ngHello'])
 
-.controller('LoginCtrl', function ($scope, $state, $rootScope, $window) {
+.controller('LoginCtrl', function ($scope, $state, $rootScope, $window, hello) {
 
     $scope.roles = [
         {
@@ -23,17 +23,17 @@ angular.module('nourriture.login', ['ngResource'])
         role: 1
     };
 
-    $scope.login = function () {
+    $scope.login = function (network) {
         //        console.info($scope.roles[$scope.credentials.role - 1].id);
-        console.info("Hi", $scope.roles[$scope.credentials.role - 1].label, $scope.credentials.username, "!");
-        console.info("Your password is [", $scope.credentials.password, "]");
-        console.info("Using OpenID here, soon.");
+        console.info("Hi", $scope.roles[$scope.credentials.role - 1].label);
+        console.info("Network:", network);
+        hello.login(network);
 
         // on login error
         //        $window.alert("Hi, login error");
 
         // on login success
         $rootScope.userType = $scope.roles[$scope.credentials.role - 1].label;
-        $state.go('tab.home');
+                $state.go('tab.home');
     }
 })

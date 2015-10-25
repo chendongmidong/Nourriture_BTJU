@@ -1,9 +1,23 @@
 <ion-view view-title="Account">
-  <ion-content>
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
-  </ion-content>
+    <ion-content>
+        <ion-list>
+            <ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Field 1</span>
+                    <input type="text" ng-model="user.string">
+                </label>
+            </ion-item>
+            <ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Field 2</span>
+                    <input type="text">
+                </label>
+            </ion-item>
+            <ion-item>
+                <ion-toggle ng-model="settings.enableFriends">
+                    Test
+                </ion-toggle>
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

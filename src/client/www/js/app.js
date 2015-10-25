@@ -1,8 +1,8 @@
 // Ionic Nourriture App
 
-angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.services', 'nourriture.tabs', 'nourriture.login', 'ngResource', 'angular-oauth2'])
+angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.services', 'nourriture.tabs', 'nourriture.login', 'ngResource', 'angular-oauth2', 'ngHello'])
 
-.run(function ($ionicPlatform, $window, $http, $rootScope, OAuth) {
+.run(function ($ionicPlatform, $window, $http, $rootScope, OAuth, hello) {
 
     $window.localStorage.apiUrl = 'http://tossabox.com:8080/api/';
     // $window.localStorage.apiUrl = 'http://tossabox.com:8080/api/';
@@ -21,6 +21,7 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
         }
     });
 
+    // OAtuth 2.0 
     $rootScope.$on('oauth:error', function (event, rejection) {
         // Ignore `invalid_grant` error - should be catched on `LoginController`.
         if ('invalid_grant' === rejection.data.error) {
@@ -35,13 +36,20 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
         // Redirect to `/login` with the `error_reason`.
         return $window.location.href = '/login?error_reason=' + rejection.data.error;
     });
+
+    // Hello
+    hello.init({
+        google: '650560663671-prj2kpurqa9h59sc4m3cmi03jd76lsj3.apps.googleusercontent.com'
+    }, {
+        redirect_uri: 'http://localhost:8100/'
+    });
 })
 
 .config(['OAuthProvider', function (OAuthProvider) {
     OAuthProvider.configure({
-        baseUrl: 'https://api.website.com',
-        clientId: 'CLIENT_ID',
-        clientSecret: 'CLIENT_SECRET' // optional
+        baseUrl: 'http://django-oauth-toolkit.herokuapp.com/consumer/exchange/',
+        clientId: '650560663671-prj2kpurqa9h59sc4m3cmi03jd76lsj3.apps.googleusercontent.com',
+        clientSecret: 'h3LiyM7jqSJqgTGjUkHMCf-_' // optional
     });
   }])
 

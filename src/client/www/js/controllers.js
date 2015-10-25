@@ -30,7 +30,9 @@ angular.module('nourriture.controllers', [])
 })
 
 .controller('AccountCtrl', function ($scope) {
-    $scope.settings = {
-        enableFriends: true
+    $scope.user = {
+        string: 'string',
+        num: 5,
+        bool: true
     };
 });
