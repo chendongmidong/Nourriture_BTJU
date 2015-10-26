@@ -3,7 +3,8 @@ from rest_framework import routers
 from nourriture import views
 
 router = routers.DefaultRouter()
-router.register(r'^ingred$', views.IngredientViewSet)
+router.register(r'ingred', views.IngredientViewSet)
+router.register(r'reci', views.RecipeViewSet)
 
 
 urlpatterns = patterns('nourriture.views',

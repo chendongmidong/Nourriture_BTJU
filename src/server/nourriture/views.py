@@ -8,7 +8,7 @@ from django.core import serializers
 from django.shortcuts import render
 import json
 
-from nourriture.serializers import IngredientSerializer
+from nourriture.serializers import IngredientSerializer, RecipeSerializer
 from rest_framework import viewsets
 
 # # def signin(request):
@@ -35,11 +35,12 @@ def home(request):
 	return render(request, 'nourriture/home.html', locals())
 
 class IngredientViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
     queryset = Ingredient.objects.all().order_by('id')
     serializer_class = IngredientSerializer
+
+class RecipeViewSet(viewsets.ModelViewSet):
+    queryset = Recipe.objects.all().order_by('id')
+    serializer_class = RecipeSerializer
 
 def ingredient(request, id):
 	if int(id) <= 0:
@@ -169,7 +170,10 @@ def recipeAdd(request):
 		return sendError('Ingredients error')
 
 	newRecipe = Recipe(name=request.POST['name'],
-					   description=request.POST.get('description', None))
+					   description=request.POST.get('description', None),
+					   preparationTime=request.POST.get('preparationTime', None),
+					   backingTime=request.POST.get('backingTime', None),
+					   howmanypeoples=request.POST.get('howmanypeoples', None))
 
 	newRecipe.save()
 

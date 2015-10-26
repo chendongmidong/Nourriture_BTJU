@@ -16,8 +16,8 @@ class Ingredient(models.Model):
 class Recipe(models.Model):
 	name = models.CharField(max_length=100, unique=True)
 	description = models.TextField(max_length=254, null=True)
-	preparationTime = models.IntegerField()
-	backingTime = models.IntegerField()
+	preparationTime = models.IntegerField(null=True)
+	backingTime = models.IntegerField(null=True)
 	howmanypeoples = models.IntegerField(null=True)
 	ingredients = models.ManyToManyField(Ingredient, through='Recipe_Ingredient')
 	count_view = models.IntegerField(default=0)
