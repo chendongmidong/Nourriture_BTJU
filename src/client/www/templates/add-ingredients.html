@@ -1,0 +1,37 @@
+<ion-view view-title="Creating an Ingredient ">
+    <ion-content class="padding">
+        <label class="item item-input">
+            <span class="input-label">Name</span>
+            <input type="text" ng-model="ingredientObj.name">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Description</span>
+            <input type="text" ng-model="ingredientObj.description">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Price</span>
+            <input type="text" ng-model="ingredientObj.price">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Heat</span>
+            <input type="text" ng-model="ingredientObj.heat">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Protein</span>
+            <input type="text" ng-model="ingredientObj.protein">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Fat</span>
+            <input type="text" ng-model="ingredientObj.fat">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Carbohydrate</span>
+            <input type="text" ng-model="ingredientObj.carbohydrate">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Vitamin</span>
+            <input type="text" ng-model="ingredientObj.vitamin">
+        </label>
+        <ion-item ng-click="addIngredient(ingredientObj)"> Add </ion-item>
+    </ion-content>
+</ion-view>
