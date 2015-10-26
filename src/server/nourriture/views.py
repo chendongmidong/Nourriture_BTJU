@@ -8,6 +8,9 @@ from django.core import serializers
 from django.shortcuts import render
 import json
 
+from nourriture.serializers import IngredientSerializer
+from rest_framework import viewsets
+
 # # def signin(request):
 
 # @csrf_exempt
@@ -30,6 +33,13 @@ import json
 def home(request):
 	"""Home page"""
 	return render(request, 'nourriture/home.html', locals())
+
+class IngredientViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Ingredient.objects.all().order_by('id')
+    serializer_class = IngredientSerializer
 
 def ingredient(request, id):
 	if int(id) <= 0:
@@ -54,7 +64,7 @@ def ingredientAll(request):
 	return sendResponse(json.dumps({'status': 'success', 'content': response}))
 
 @csrf_exempt
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/accounts/login/')
 def ingredientAdd(request):
 	if request.method != 'POST':
 		return sendError('No post request')

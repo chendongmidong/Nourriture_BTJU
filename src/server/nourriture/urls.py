@@ -1,9 +1,15 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
+from rest_framework import routers
+from nourriture import views
+
+router = routers.DefaultRouter()
+router.register(r'^ingred$', views.IngredientViewSet)
+
 
 urlpatterns = patterns('nourriture.views',
     url(r'^$', 'home'),
-    # url(r'^signin$', 'signin'),
-    # url(r'^signup$', 'signup'),
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^ingredient/(?P<id>\d+)$', 'ingredient'),
     url(r'^ingredient/all$', 'ingredientAll'),
     url(r'^ingredient/add$', 'ingredientAdd'),
