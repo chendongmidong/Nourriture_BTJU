@@ -39,17 +39,18 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
 
     // Hello
     hello.init({
-        google: '650560663671-prj2kpurqa9h59sc4m3cmi03jd76lsj3.apps.googleusercontent.com'
+        google: '650560663671-prj2kpurqa9h59sc4m3cmi03jd76lsj3.apps.googleusercontent.com',
+        github: 'https://github.com/login/oauth/authorize'
     }, {
-        redirect_uri: 'http://localhost:8100/'
+        redirect_uri: '../templates/redirect.html'
     });
 })
 
 .config(['OAuthProvider', function (OAuthProvider) {
     OAuthProvider.configure({
         baseUrl: 'http://django-oauth-toolkit.herokuapp.com/consumer/exchange/',
-        clientId: '650560663671-prj2kpurqa9h59sc4m3cmi03jd76lsj3.apps.googleusercontent.com',
-        clientSecret: 'h3LiyM7jqSJqgTGjUkHMCf-_' // optional
+        clientId: '03eca47598e66298fe69',
+        clientSecret: 'a51c290d5ea44e728bb00957755e08944ddc1d7f ' // optional
     });
   }])
 
@@ -117,12 +118,32 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
         }
     })
 
+    .state('tab.add-ingredients', {
+        url: '/ingredients/add',
+        views: {
+            'ingredients': {
+                templateUrl: 'templates/add-ingredients.html',
+                controller: 'AddIngredientsCtrl'
+            }
+        }
+    })
+
     .state('tab.recipes', {
         url: '/recipes',
         views: {
             'recipes': {
                 templateUrl: 'templates/recipes.html',
                 controller: 'RecipesCtrl'
+            }
+        }
+    })
+
+    .state('tab.add-recipes', {
+        url: '/recipes/add',
+        views: {
+            'recipes': {
+                templateUrl: 'templates/add-recipes.html',
+                controller: 'AddRecipesCtrl'
             }
         }
     })
