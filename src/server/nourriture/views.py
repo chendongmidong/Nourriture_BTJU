@@ -153,6 +153,17 @@ def recipeAll(request):
 
 	return sendResponse(json.dumps({'status': 'success', 'content': response}))
 
+def recipeGetName(request, name):
+	recipes = Recipe.objects.filter(name__contains=name)
+	response = list()
+
+	for recipe in recipes:
+		response.append(serializeRecipe(recipe))
+
+	return sendResponse(json.dumps({'status': 'success', 'content': response}))
+
+
+
 @csrf_exempt
 #@login_required(login_url='/accounts/login/')
 def recipeAdd(request):

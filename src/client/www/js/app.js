@@ -4,7 +4,7 @@ angular.module('nourriture', ['ionic', 'nourriture.controllers', 'nourriture.ser
 
 .run(function ($ionicPlatform, $window, $http, $rootScope, OAuth, hello) {
 
-    $window.localStorage.apiUrl = 'http://tossabox.com:8080/api/';
+    $window.localStorage.apiUrl = 'http://localhost.com:8000/api/';
     // $window.localStorage.apiUrl = 'http://tossabox.com:8080/api/';
 
     $ionicPlatform.ready(function () {
