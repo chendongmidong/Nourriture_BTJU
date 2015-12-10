@@ -10,4 +10,6 @@
 
     <string name="personal_setting">Personal Setting</string>
     <string name="eating_setting">Eating Setting</string>
+    <string name="value_test">value test</string>
+
 </resources>

@@ -18,10 +18,10 @@
         </activity>
 
         <activity
-            android:name=".SettingActivity"
-            android:label="@string/action_settings">
+            android:name=".PersonalSettingActivity"
+            android:label="@string/personal_setting">
             <intent-filter>
-                <action android:name="com.nourriture.app.setting" />
+                <action android:name="com.nourriture.app.p_setting" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

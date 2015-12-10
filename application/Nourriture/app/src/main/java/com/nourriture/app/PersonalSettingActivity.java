@@ -15,13 +15,13 @@ import java.util.Map;
 /**
  * Created by liuyifan on 15/12/9.
  */
-public class SettingActivity extends AppCompatActivity {
-    private String[] name1 = {"Sex", "Email", "Phone"};
-    private int[] picture1 = {R.mipmap.email, R.mipmap.settings, R.mipmap.gallery};
+public class PersonalSettingActivity extends AppCompatActivity {
+    private String[] name1 = {"Name", "Account", "Password", "Sex"};
+    private int[] picture1 = {R.mipmap.name, R.mipmap.account, R.mipmap.password, R.mipmap.sex};
     private List<Map<String, Object>> listItems1;
 
-    private String[] name2 = {"222Test", "TestEmail", "Phone233"};
-    private int[] picture2 = {R.mipmap.android, R.mipmap.weather, R.mipmap.gallery};
+    private String[] name2 = {"Country", "Religion"};
+    private int[] picture2 = {R.mipmap.country, R.mipmap.religion};
     private List<Map<String, Object>> listItems2;
     @Override
     protected void onCreate(Bundle savedInstanceState){

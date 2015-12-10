@@ -13,7 +13,8 @@ import android.widget.TextView;
  * Created by Simon on 23-Nov-15.
  */
 public class TabFragment1 extends Fragment {
-    public final static String SETTING_ACTION = "com.nourriture.app.setting";
+    public final static String PERSONAL_SETTING = "com.nourriture.app.p_setting"; //PersonalSettingActivity
+    public final static String SETTING = "";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_fragment_1, container, false);
@@ -23,7 +24,7 @@ public class TabFragment1 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setAction(SETTING_ACTION);
+                intent.setAction(PERSONAL_SETTING);
                 startActivity(intent);
             }
         });
