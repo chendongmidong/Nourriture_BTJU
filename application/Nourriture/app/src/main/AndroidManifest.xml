@@ -18,10 +18,19 @@
         </activity>
 
         <activity
-            android:name=".PersonalSettingActivity"
+            android:name=".setting.PersonalSettingActivity"
             android:label="@string/personal_setting">
             <intent-filter>
                 <action android:name="com.nourriture.app.p_setting" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".setting.PersonalSettingNameActivity"
+            android:label="Change Name">
+            <intent-filter>
+                <action android:name="com.nourriture.app.name" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
