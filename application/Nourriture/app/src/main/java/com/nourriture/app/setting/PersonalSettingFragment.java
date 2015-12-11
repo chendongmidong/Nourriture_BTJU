@@ -17,7 +17,8 @@ import java.util.*;
  * Created by liuyifan on 15/12/10.
  */
 @SuppressWarnings("unchecked")
-public class PersonalSettingFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class PersonalSettingFragment extends Fragment
+        implements AdapterView.OnItemClickListener {
     private int[] picture = {R.mipmap.name, R.mipmap.account, R.mipmap.password, R.mipmap.sex, R.mipmap.country, R.mipmap.religion};
     private String[] list = {"Name", "Account", "Password", "Sex", "Country", "Religion"};
     private String[] value = new String[6];
@@ -95,7 +96,8 @@ public class PersonalSettingFragment extends Fragment implements AdapterView.OnI
             if (actionName.equals("name")){
                 String name = value[0];
                 Bundle arguments = new Bundle();
-                arguments.putString("name",name);
+                arguments.putString("name", name);
+                arguments.putBoolean("isTwoPane", isTwoPane);
                 PersonalSettingNameFragment personalSettingNameFragment = new PersonalSettingNameFragment();
                 personalSettingNameFragment.setArguments(arguments);
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -104,7 +106,7 @@ public class PersonalSettingFragment extends Fragment implements AdapterView.OnI
         } else {
             if (actionName.equals("name")){
                 String name = value[0];
-                PersonalSettingNameActivity.actionStart(getActivity(), name);
+                PersonalSettingNameActivity.actionStart(getActivity(), name, isTwoPane);
             }
         }
     }

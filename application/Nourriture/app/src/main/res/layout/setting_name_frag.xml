@@ -4,15 +4,27 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <TextView android:layout_width="wrap_content" android:layout_height="10dp"/>
-
-    <TextView
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="@string/name"
-            android:textSize="20sp"
-            android:paddingTop="10sp"
-            android:paddingLeft="30dp"
-            android:background="#ffff"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:text="@string/name"
+                android:textSize="20sp"
+                android:paddingTop="10sp"
+                android:paddingLeft="30dp"
+                android:background="#ffff"/>
+
+        <Button
+                android:id="@+id/name_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:background="#99CC33"/>
+    </LinearLayout>
 
     <TextView android:layout_width="wrap_content" android:layout_height="2dp"/>
 

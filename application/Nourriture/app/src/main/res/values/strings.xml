@@ -7,10 +7,10 @@
     <string name="title_section4">Add Moments</string>
 
     <string name="action_settings">Settings</string>
-
     <string name="personal_setting">Personal Setting</string>
     <string name="eating_setting">Eating Setting</string>
     <string name="value_test">value test</string>
     <string name="name">Name:</string>
+    <string name="submit">Submit</string>
 
 </resources>

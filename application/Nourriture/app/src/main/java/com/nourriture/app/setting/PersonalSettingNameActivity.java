@@ -17,15 +17,18 @@ public class PersonalSettingNameActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.setting_name);
 
-        String name = getIntent().getStringExtra("name");
-        PersonalSettingNameFragment personalSettingNameFragment =
-                (PersonalSettingNameFragment) getSupportFragmentManager().findFragmentById(R.id.setting_name_frag);
-        personalSettingNameFragment.setName(name);
+//        String name = getIntent().getStringExtra("name");
+//        boolean isTwoPane = getIntent().getBooleanExtra("isTwoPane", false);
+//
+//        PersonalSettingNameFragment personalSettingNameFragment =
+//                (PersonalSettingNameFragment) getSupportFragmentManager().findFragmentById(R.id.setting_name_frag);
+//        personalSettingNameFragment.setName(name);
     }
 
-    public static void actionStart(Context context, String name){
+    public static void actionStart(Context context, String name, boolean isTwoPane){
         Intent intent = new Intent(context, PersonalSettingNameActivity.class);
-        intent.putExtra("name",name);
+        intent.putExtra("name", name);
+        intent.putExtra("isTwoPane", isTwoPane);
         context.startActivity(intent);
     }
 }
