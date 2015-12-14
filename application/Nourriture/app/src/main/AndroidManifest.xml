@@ -30,7 +30,23 @@
             android:name=".setting.PersonalSettingNameActivity"
             android:label="Change Name">
             <intent-filter>
-                <action android:name="com.nourriture.app.name" />
+                <action android:name="com.nourriture.app.setting.name" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".setting.PersonalSettingSexActivity"
+                  android:label="Change Sex">
+            <intent-filter>
+                <action android:name="com.nourriture.app.setting.sex" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".setting.PersonalSettingPasswordActivity"
+                  android:label="Change Password">
+            <intent-filter>
+                <action android:name="com.nourriture.app.setting.password" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

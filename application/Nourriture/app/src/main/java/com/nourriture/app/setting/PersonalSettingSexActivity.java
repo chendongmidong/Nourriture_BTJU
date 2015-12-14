@@ -6,13 +6,13 @@ import android.view.Window;
 import com.nourriture.app.R;
 
 /**
- * Created by liuyifan on 15/12/11.
+ * Created by liuyifan on 15/12/14.
  */
-public class PersonalSettingNameActivity extends FragmentActivity {
+public class PersonalSettingSexActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.setting_name);
+        setContentView(R.layout.setting_sex);
     }
 }
